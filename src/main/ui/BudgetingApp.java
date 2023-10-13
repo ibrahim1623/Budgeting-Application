@@ -1,7 +1,5 @@
 package ui;
 
-
-
 import model.Transaction;
 import model.TransactionRecord;
 
@@ -92,7 +90,7 @@ public class BudgetingApp {
         int amount = input.nextInt();
         Transaction transaction = new Transaction(title, amount);
 
-        if (title.length() > 0 && amount >= 0) {
+        if (title.length() > 0 && amount > 0) {
             selected.addTransaction(transaction);
             printT(selected);
         } else {
@@ -129,6 +127,7 @@ public class BudgetingApp {
     // MODIFIES: this
     // EFFECTS: conducts an edit transaction method
     private void doEdit() {
+        doViewAll();
         TransactionRecord selected = transactions;
         System.out.print("Enter index for transaction to edit: ");
         int index = input.nextInt();
