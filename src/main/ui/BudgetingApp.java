@@ -3,18 +3,28 @@ package ui;
 import model.Transaction;
 import model.TransactionRecord;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 
 // Budgeting application
 public class BudgetingApp {
+    private static final String JSON_STORE = "./data/workroom.json";
     private TransactionRecord transactions;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the budgeting application
-    public BudgetingApp() {
+    public BudgetingApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBudgetingApp();
+
     }
 
     // MODIFIES: this
@@ -56,6 +66,12 @@ public class BudgetingApp {
             case "e":
                 doEdit();
                 break;
+            case "s":
+                doSave();
+                break;
+            case "l":
+                doLoad();
+                break;
             default:
                 System.out.println("Selection not valid...");
                 break;
@@ -65,7 +81,7 @@ public class BudgetingApp {
     // MODIFIES: this
     // EFFECTS: initializes transaction record
     private void init() {
-        transactions = new TransactionRecord();
+        transactions = new TransactionRecord("transaction record");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -77,6 +93,8 @@ public class BudgetingApp {
         System.out.println("\tv_all -> view all transactions");
         System.out.println("\tv_one -> view one transaction");
         System.out.println("\te -> edit a transaction");
+        System.out.println("\ts -> save");
+        System.out.println("\tl -> load");
         System.out.println("\tq -> quit");
     }
 
@@ -152,6 +170,29 @@ public class BudgetingApp {
         ArrayList<Transaction> list = selected.viewAll();
         for (Transaction t : list) {
             System.out.print("Title: " + t.getTitle() + "     " + "Amount: " + t.getAmount() + "\n");
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void doSave() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(transactions);
+            jsonWriter.close();
+            System.out.println("Saved " + transactions.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void doLoad() {
+        try {
+            transactions = jsonReader.read();
+            System.out.println("Loaded " + transactions.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

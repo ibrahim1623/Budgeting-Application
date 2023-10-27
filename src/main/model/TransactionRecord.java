@@ -1,15 +1,27 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // maintains a record of all transactions
-public class TransactionRecord {
+public class TransactionRecord implements Writable {
     private final ArrayList<Transaction> transactions; // List of all transactions
+    private String name; // Name of transaction
+
 
     // MODIFIES: this
     // EFFECTS: creates a record of transactions with an empty list of transactions
-    public TransactionRecord() {
+    public TransactionRecord(String name) {
         this.transactions = new ArrayList<>();
+        this.name = name;
+    }
+
+    // EFFECT: get method for transaction record
+    public String getName() {
+        return name;
     }
 
     // MODIFIES: transaction
@@ -43,5 +55,24 @@ public class TransactionRecord {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("transactions", thingiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray thingiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Transaction t : transactions) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

@@ -12,4 +12,6 @@ User Stories:
 - As a user, I want to be able to view all the purchases I've recorded.
 - As a user, I want to be able to view details of each purchase I recorded.
 - As a user, I want to be able to edit a purchase I may have incorrectly added.
+- As a user, I want to be able to save my transaction list to a file.
+- As a user, I want to be able to load my transaction list from a file.
 

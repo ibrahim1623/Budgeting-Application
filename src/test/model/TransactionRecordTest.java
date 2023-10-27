@@ -15,7 +15,7 @@ public class TransactionRecordTest {
     void runBefore() {
         t1 = new Transaction("grocery", 82);
         t2 = new Transaction("clothing", 90);
-        record = new TransactionRecord();
+        record = new TransactionRecord("transaction record");
     }
 
     @Test

@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a transaction having a title and amount;
-public class Transaction {
+public class Transaction implements Writable {
     private int amount; // amount of the current transaction
     private String title; // title of the new transaction
 
@@ -28,5 +31,18 @@ public class Transaction {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    // EFFECTS: returns string representation of this thingy
+    public String toString() {
+        return title + ": " + amount;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("amount", amount);
+        return json;
     }
 }
