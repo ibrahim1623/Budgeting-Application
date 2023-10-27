@@ -20,7 +20,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads Transaction Record from file and returns it;
     // throws IOException if an error occurs reading data from file
     public TransactionRecord read() throws IOException {
         String jsonData = readFile(source);
@@ -47,8 +47,8 @@ public class JsonReader {
         return tr;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: tr
+    // EFFECTS: parses transactions from JSON object and adds them to Transaction Record
     private void addTransactions(TransactionRecord tr, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("transactions");
         for (Object json : jsonArray) {
@@ -57,8 +57,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: tr
+    // EFFECTS: parses thingy from JSON object and adds it to Transaction Record
     private void addTransaction(TransactionRecord wr, JSONObject jsonObject) {
         String name = jsonObject.getString("title");
         int amount = jsonObject.getInt("amount");

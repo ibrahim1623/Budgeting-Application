@@ -33,11 +33,6 @@ public class Transaction implements Writable {
         this.title = title;
     }
 
-    // EFFECTS: returns string representation of this thingy
-    public String toString() {
-        return title + ": " + amount;
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

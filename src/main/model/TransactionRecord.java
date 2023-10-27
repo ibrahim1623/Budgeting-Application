@@ -61,12 +61,12 @@ public class TransactionRecord implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("transactions", thingiesToJson());
+        json.put("transactions", transactionsToJson());
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray thingiesToJson() {
+    // EFFECTS: returns transactions in this transaction record as a JSON array
+    private JSONArray transactionsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Transaction t : transactions) {
