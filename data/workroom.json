@@ -1,0 +1,13 @@
+{
+    "name": "transaction record",
+    "transactions": [
+        {
+            "amount": 100,
+            "title": "grocery"
+        },
+        {
+            "amount": 120,
+            "title": "apples"
+        }
+    ]
+}
