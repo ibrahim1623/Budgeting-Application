@@ -42,8 +42,8 @@ class JsonReaderTest extends JsonTest {
             assertEquals("My Transaction Record", tr.getName());
             List<Transaction> transactions = tr.viewAll();
             assertEquals(2, transactions.size());
-            checkThingy("grocery", 100, transactions.get(0));
-            checkThingy("clothes", 25, transactions.get(1));
+            checkTransaction("grocery", 100, transactions.get(0));
+            checkTransaction("clothes", 25, transactions.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

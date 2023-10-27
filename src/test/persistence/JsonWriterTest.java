@@ -27,7 +27,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyTransactionRecord() {
         try {
             TransactionRecord tr = new TransactionRecord("My Transaction Record");
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
@@ -45,7 +45,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralTransactionRecord() {
         try {
             TransactionRecord tr = new TransactionRecord("My Transaction Record");
             tr.addTransaction(new Transaction("grocery", 100));
@@ -60,8 +60,8 @@ class JsonWriterTest extends JsonTest {
             assertEquals("My Transaction Record", tr.getName());
             List<Transaction> transactions = tr.viewAll();
             assertEquals(2, transactions.size());
-            checkThingy("grocery", 100, transactions.get(0));
-            checkThingy("clothes", 25, transactions.get(1));
+            checkTransaction("grocery", 100, transactions.get(0));
+            checkTransaction("clothes", 25, transactions.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
