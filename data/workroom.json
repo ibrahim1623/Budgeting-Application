@@ -2,12 +2,16 @@
     "name": "transaction record",
     "transactions": [
         {
-            "amount": 100,
-            "title": "grocery"
+            "amount": 20,
+            "title": "apples"
         },
         {
-            "amount": 120,
-            "title": "apples"
+            "amount": 10,
+            "title": "oranges"
+        },
+        {
+            "amount": 100,
+            "title": "balls"
         }
     ]
 }

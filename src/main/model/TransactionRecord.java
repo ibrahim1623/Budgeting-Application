@@ -4,10 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // maintains a record of all transactions
-public class TransactionRecord implements Writable {
+public class TransactionRecord implements Writable, Serializable {
     private final ArrayList<Transaction> transactions; // List of all transactions
     private String name; // Name of transaction
 

@@ -15,3 +15,13 @@ User Stories:
 - As a user, I want to be able to save my transaction list to a file.
 - As a user, I want to be able to load my transaction list from a file.
 
+# Instructions for Grader
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the Add 
+  Transaction button, then filling out the name and amount fields. 
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking the
+  Calculate Average button which shows the average cost of the transactions.
+- You can locate my visual component by pressing the Show Image button.
+- You can save the state of my application by pressing the Save button and selecting a location and name for the file.
+- You can reload the state of my application by pressing the Load button and selecting the file to reload from.
+- You can view all the transaction by clicking the View All Transactions Button.

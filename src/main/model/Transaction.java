@@ -3,8 +3,10 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.io.Serializable;
+
 // Represents a transaction having a title and amount;
-public class Transaction implements Writable {
+public class Transaction implements Writable, Serializable {
     private int amount; // amount of the current transaction
     private String title; // title of the new transaction
 
