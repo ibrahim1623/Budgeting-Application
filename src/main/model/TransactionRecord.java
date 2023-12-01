@@ -29,6 +29,7 @@ public class TransactionRecord implements Writable, Serializable {
     // EFFECTS: adds a new transaction to array list of transactions
     public void addTransaction(Transaction transaction) {
         this.transactions.add(transaction);
+        EventLog.getInstance().logEvent(new Event("Added a transaction to transaction record."));
     }
 
     // EFFECTS: returns a list of all transactions
@@ -56,6 +57,20 @@ public class TransactionRecord implements Writable, Serializable {
         } else {
             return false;
         }
+    }
+
+    // REQUIRES: !transactions.isEmpty()
+    // EFFECTS: computes the average and returns it as a double
+    public double calculateAverage() {
+        double totalAmount = 0;
+
+        for (Transaction transaction : transactions) {
+            totalAmount += transaction.getAmount();
+        }
+
+        double average = totalAmount / transactions.size();
+        EventLog.getInstance().logEvent(new Event("Average calculated is " + average));
+        return average;
     }
 
     @Override

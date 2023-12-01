@@ -74,4 +74,14 @@ public class TransactionRecordTest {
         assertEquals("games", record.viewTransaction(0).getTitle());
         assertEquals(25, record.viewTransaction(0).getAmount());
     }
+
+    @Test
+    void testCalculateAverage() {
+        record.addTransaction(t1);
+        record.addTransaction(t2);
+        assertEquals(2, record.viewAll().size());
+        assertEquals(t1, record.viewTransaction(0));
+        assertEquals(t2, record.viewTransaction(1));
+        assertEquals((82+90)/2, record.calculateAverage());
+    }
 }

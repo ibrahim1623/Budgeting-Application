@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Transaction;
 import model.TransactionRecord;
 
@@ -22,6 +24,7 @@ public class BudgetingGUI extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
         initializeComponents();
+        addShutdownHook();
     }
 
     // EFFECTS: initializes the components of the budgeting application GUI
@@ -131,19 +134,27 @@ public class BudgetingGUI extends JFrame {
     private void calculateAverage() {
         ArrayList<Transaction> transactions = transactionRecord.viewAll();
         if (!transactions.isEmpty()) {
-            double totalAmount = 0;
-
-            for (Transaction transaction : transactions) {
-                totalAmount += transaction.getAmount();
-            }
-
-            double average = totalAmount / transactions.size();
+            double average = transactionRecord.calculateAverage();
 
             JOptionPane.showMessageDialog(this, "Average Amount: $" + average,
                     "Average Calculation", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "No transactions to calculate average.",
                     "Average Calculation", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // EFFECTS: adds a shutdown hook to print event logs when the application quits
+    private void addShutdownHook() {
+        // Code to be executed when the application is shutting down
+        Runtime.getRuntime().addShutdownHook(new Thread(this::printEventLogsToConsole));
+    }
+
+    // EFFECTS: prints event logs to the console
+    private void printEventLogsToConsole() {
+        EventLog eventLog = EventLog.getInstance();  // Access the EventLog instance
+        for (Event event : eventLog) {
+            System.out.println(event.toString());
         }
     }
 
